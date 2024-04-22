@@ -62,7 +62,7 @@ vboxuser@control:~/ansible$
   become: yes
   tasks:
     - name: Ping a todos los nodos webservers
-      ping:
+      shell: ansible webservers -m ping
 
     - name: Instalación de Apache en nodo1
       apt:
@@ -80,7 +80,7 @@ vboxuser@control:~/ansible$
   become: yes
   tasks:
     - name: Ping a todos los nodos webservers
-      ping:
+      shell: ansible webservers -m ping
 
     - name: Instalación de Apache en nodo1
       apt:
