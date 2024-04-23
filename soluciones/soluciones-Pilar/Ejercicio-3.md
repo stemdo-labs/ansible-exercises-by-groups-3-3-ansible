@@ -98,14 +98,34 @@ database_host: prod_database.example.com
 
 
 3. Siguiendo la documentación de ansible obtener estos valores de un nuestro máquina local como de un nodo: `os family` , `hostname` y `ipv4`
+
 ansible localhost -m setup -a 'filter=ansible_distribution_family,ansible_hostname,ansible_default_ipv4'
 ansible nodo2 -m setup -a 'filter=ansible_distribution_family,ansible_hostname,ansible_default_ipv4'
 
 
 4. Usar el módulo `setup` para obtener la ipv6 del nodo, utilizando comandos ad-hoc. El resultado se debe almacenarse en un fichero, todo se debe ejecutar en un único comando.
+
 ansible nodo2 -m setup -a 'filter=ansible_default_ipv6' > ipv6.txt
 
 
 
 
 5. Crea un fact personalizado que te permita obtener la variables del nodo remoto.
+# Primero creo mi script
+#!/bin/bash
+echo '{"os_type": "$(uname -s)"}'
+
+
+#Creo el playbook y lo lanzo como una tarea
+
+- hosts: nodo2
+  gather_facts: no
+   
+  tasks:
+    - name: Ejecutar script de fact personalizado
+      script: script.sh
+      register: custom_fact_output
+
+    - name: Mostrar el resultado del fact personalizado
+      debug:
+        var: custom_fact_output.stdout
