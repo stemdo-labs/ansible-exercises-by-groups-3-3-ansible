@@ -37,25 +37,28 @@
    ----------------------------------------------------------------
    entonces en el yml:
      ```yaml
-     
+
 - name: Configurar firewall
   hosts: web
+  vars_files:
+    - vars.yml
+  become: yes
   tasks:
-    - firewalld:
+    - ufw:
         service: '{{ firewall_service }}'
         permanent: true
-        state: enable
-    - firewalld:
+        state: enabled
+    - ufw:
         source: '{{ firewall_source }}'
         zone: internal
-        state: enable
+        state: enabled
     - name: Configurar puertos en el firewall
-      firewalld:
+      ufw:
         port: '{{ item }}'
         permanent: true
-        state: disabled
+        state: enabled
       loop: '{{ firewall_ports }}'
-      
+
 
 2. Definir un playbbok donde se pida al usuario el entorno(``dev``,``pre``,``pro``) de despliegue para cargar las variables del fichero correspondiente al entorno. 
 
