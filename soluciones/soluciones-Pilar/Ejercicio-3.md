@@ -28,14 +28,14 @@
           zone: internal
           state: enable
     ```
-    Prametrizaremos los valores constantes que son susceptibles de ser repetidos
+# Prametrizaremos los valores constantes que son susceptibles de ser repetidos
     firewall_service: https
     firewall_ports: 
       - 8081/tcp
       - 161-162/udp    
     firewall_source: 192.168.20.0/24
    ----------------------------------------------------------------
-   entonces en el yml:
+# entonces en el yml:
      ```yaml
 
 - name: Configurar firewall
@@ -58,9 +58,43 @@
         permanent: true
         state: enabled
       loop: '{{ firewall_ports }}'
-
+---
 
 2. Definir un playbbok donde se pida al usuario el entorno(``dev``,``pre``,``pro``) de despliegue para cargar las variables del fichero correspondiente al entorno. 
+# Contenido del archivo dev.yml
+app_port: 8080
+database_host: localhost
+# Contenido del archivo pre.yml
+app_port: 8081
+database_host: pre_database.example.com
+# Contenido del archivo pro.yml
+app_port: 80
+database_host: prod_database.example.com
+
+#Playbook para el deploy deploy.yml
+- hosts: nodo2
+  gather_facts: false
+  become: 'yes'
+
+  tasks:
+    - name: Solicitar valor de environment
+      pause:
+        prompt: "Por favor, introduce el nombre del archivo de variables (por ejemplo, pre, dev, pro):"
+      register: user_input
+
+    - name: Mostrar valor de environment
+      debug:
+        var: user_input.user_input
+
+    - name: Cargar variables del entorno
+      include_vars:
+        file: "{{ user_input.user_input }}.yml"
+      when: user_input.user_input is defined
+      
+    - name: Mostrar variables cargadas
+      debug:
+        var: app_port
+    
 
 
 3. Siguiendo la documentación de ansible obtener estos valores de un nuestro máquina local como de un nodo: `os family` , `hostname` y `ipv4`
