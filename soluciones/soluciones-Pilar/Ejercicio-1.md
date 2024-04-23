@@ -2,6 +2,7 @@
 
 1. Crear la carpeta de trabajo y el primer inventario solo con el nodo 1.
 
+
 2. Crear un inventario (ficticio) donde tengamos 5 nodos (nodo1 a nodo5) agrupados en los siguientes grupos:
    - `webservers` (nodo1, nodo4, nodo5)
    - `dataservers` (nodo3)
