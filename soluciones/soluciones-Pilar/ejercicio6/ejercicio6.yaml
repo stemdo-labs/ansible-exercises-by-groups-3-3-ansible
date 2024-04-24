@@ -1,0 +1,17 @@
+- name: Buscar archivos grandes de forma recursiva
+  hosts: nodo2
+  become: yes
+  tasks:
+    - name: Buscar archivos de más de 100 megabytes de forma recursiva
+      find:
+        paths: /
+        recurse: yes
+        size: 100M
+      register: archivos_grandes
+
+    - name: Imprimir archivos grandes
+      debug:
+        msg: "Archivo {{ item.path }} de tamaño {{ item.size }}"
+      loop: "{{ archivos_grandes.files }}"
+
+

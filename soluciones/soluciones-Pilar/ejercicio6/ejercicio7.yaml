@@ -1,0 +1,14 @@
+- name: Buscar archivos con expresión regular en /var/log
+  hosts: nodo2
+  tasks:
+    - name: Buscar archivos con expresión regular
+      find:
+        paths: /var/log
+        patterns: '[a-z]_[0-9]{8}\.log'
+        size: 100M
+      register: archivos_encontrados
+
+    - name: Mostrar archivos encontrados
+      debug:
+        msg: "{{ item.path }}"
+      loop: "{{ archivos_encontrados.files }}"

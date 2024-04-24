@@ -1,0 +1,9 @@
+- name: Descomprimir archivos para el usuario weblogic
+  hosts: nodo2
+  tasks:
+    - name: Descomprimir archivo
+      unarchive:
+        src: /home/weblogic/server-jre-8u191-linux-x64.tar.gz
+        dest: /opt/oracle
+        remote_src: yes
+      become_user: weblogic
