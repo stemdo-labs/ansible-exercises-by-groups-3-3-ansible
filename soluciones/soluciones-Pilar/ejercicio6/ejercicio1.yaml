@@ -1,11 +1,14 @@
-- name: Verificar si los servicios están iniciados y mostrar su estado
+- name: Verificar si los servicios están iniciados
   hosts: nodo2
   tasks:
+    - name: Crear lista web_service
+      set_fact:
+        web_service: ['httpd', 'vsftpd']
+
     - name: Recopilar información sobre los servicios
       service_facts:
-
+    
     - name: Mostrar estado de los servicios
       debug:
-        msg: "{{ item.key }} está {{ 'iniciado' if ansible_services[item.key].state == 'running' else 'detenido' }}"
-      loop: "{{ ansible_services }}"
-      when: item.key in web_service
+        msg: "El servicio {{ item }} está {{ 'iniciado' if ansible_services[item].state == 'running' else 'detenido' }}"
+      loop: "{{ web_service }}"
