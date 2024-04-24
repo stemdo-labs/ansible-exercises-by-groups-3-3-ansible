@@ -1,0 +1,16 @@
+- name: Comprimir logs de Tomcat sin archivos de acceso en formato gz
+  hosts: node2
+  tasks:
+    - name: Comprimir archivos de /apps/tomcat/logs
+      archive:
+        path: /apps/tomcat/logs
+        dest: /tmp/tomcat_logs.tar.gz
+        format: gz
+        exclude: '*.txt,*access*'
+
+    - name: Comprimir archivos de /var/log/tomcat/
+      archive:
+        path: /var/log/tomcat/
+        dest: /tmp/tomcat_logs_var.tar.gz
+        format: gz
+        exclude: '*.txt,*access*'
