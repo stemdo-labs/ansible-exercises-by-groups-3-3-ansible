@@ -1,8 +1,8 @@
- Comprimir el directorio /apps/tomcat en formato gz (El directorio es opcional, siempre que puedas aplicar el ejercicio)
+ 1. Comprimir el directorio /apps/tomcat en formato gz (El directorio es opcional, siempre que puedas aplicar el ejercicio)
 
 Sin usar variables
 
-```
+``` yml
 - name: Comprimir directorio
   hosts: grupo1
   become: yes
@@ -17,10 +17,9 @@ Sin usar variables
 ```
 
 
-Usando variables
-Comprimir todos los archivos de la carpeta /apps/tomcat/logs y de la carpeta /var/log/tomcat/ Excluir aquellos que tengan la palabra access y sean de extensión .txt (El directorio es opcional, siempre que puedas aplicar el ejercicio)
+2. Usando variables. Comprimir todos los archivos de la carpeta /apps/tomcat/logs y de la carpeta /var/log/tomcat/ Excluir aquellos que tengan la palabra access y sean de extensión .txt (El directorio es opcional, siempre que puedas aplicar el ejercicio)
 
-```
+``` yml
 - name: Comprimir directorio
   hosts: grupo1
   become: yes
@@ -42,9 +41,9 @@ Comprimir todos los archivos de la carpeta /apps/tomcat/logs y de la carpeta /va
         format: gz
 ```
 
-Instalar paquetes .deb desde local y desde internet, probad a instalar algún programa que conozcáis
+3. Instalar paquetes .deb desde local y desde internet, probad a instalar algún programa que conozcáis
 
-```
+``` yml
 - name: deb
   hosts: grupo1
   become: yes

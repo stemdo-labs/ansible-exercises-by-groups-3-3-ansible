@@ -45,7 +45,7 @@ ask_become_pass = true
 
 4. Lanzar con comando: ping a todos los nodos webservers del inventario ficticio para comprobar cuales están activos y cuales no.
 
-```
+```yml
 - name: check Connection
   hosts: nodoaall
   tasks:
@@ -63,7 +63,7 @@ ansible web_ervers -b -m apt -a "name=apache2 state=latest"
 
 crar un archivo llamado fechadora.data 
 
-```
+```yml
 ---
 - hosts: all
   tasks:
@@ -93,7 +93,7 @@ Respuesta:
 
 7. Crear un playbook que haga las tareas anteriores 4 y 5 para el nodo1.
 
-```
+```yml
 ---
 - hosts: nodo1
   user: eperez
@@ -112,8 +112,8 @@ Respuesta:
    - una tarea más que compruebe que apache2 está funcionando.
    - una tarea que instale la base de datos mariadb en su última versión.
 
-```                               
-- name: Tareas para el nodo1
+``` yml                        
+- name: Tareas
   hosts: grupo1
   become: yes
   tasks:
