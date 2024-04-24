@@ -1,0 +1,11 @@
+- name: Verificar si los servicios están iniciados y mostrar su estado
+  hosts: nodo2
+  tasks:
+    - name: Recopilar información sobre los servicios
+      service_facts:
+
+    - name: Mostrar estado de los servicios
+      debug:
+        msg: "{{ item.key }} está {{ 'iniciado' if ansible_services[item.key].state == 'running' else 'detenido' }}"
+      loop: "{{ ansible_services }}"
+      when: item.key in web_service
