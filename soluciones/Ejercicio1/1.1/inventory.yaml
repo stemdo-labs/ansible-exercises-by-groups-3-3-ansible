@@ -1,0 +1,15 @@
+myhosts:
+  hosts: 
+    nodo1:
+      #ansible_user: 'usernode1'
+      ansible_host: 192.168.1.89
+      ssh_private_key_pass: ../id_rsa
+      ansible_ssh_user: 'usernode1'
+      become: yes
+
+all:
+  vars:
+    become: true
+    become_user: 'root'
+    ansible_ssh_pass: 'pass'
+    ansible_host: '192.168.1.89'

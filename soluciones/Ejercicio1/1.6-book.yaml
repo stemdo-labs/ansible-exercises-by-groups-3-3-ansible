@@ -1,0 +1,14 @@
+---
+- name: ping a todo e instalar apache
+  hosts: nodo1
+  become: yes
+
+  tasks:
+    - name: echo date to fechahora
+      shell: echo '$(date)' >> /tmp/fechahora.data
+      register: fechaHora
+    - name: show contents of fechaHora
+      debug:
+        msg: 'Fechahora contiene  {{ fechaHora }}'
+    #- debug: msg="the echo was {{ cat /tmp/fechahora.data}}"
+...

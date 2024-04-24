@@ -1,0 +1,21 @@
+webservers:
+  hosts:
+    nodo1:
+      ansible_user: 'nodo1'
+    nodo4:
+      ansible_user: 'nodo4'
+    nodo5:
+      ansible_user: 'nodo5'
+dataservers:
+  hosts:
+    nodo3:
+      ansible_user: 'nodo3'
+proxy:
+  hosts: 
+    nodo2:
+      ansible_user: 'nodo2'
+
+all:
+  vars:
+    ansible_ssh_pass: 'pass'
+    ansible_host: 'localhost'
