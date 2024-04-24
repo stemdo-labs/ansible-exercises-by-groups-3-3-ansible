@@ -1,15 +1,9 @@
-- name: Instalar paquetes con loop
+- name: Descomprimir archivos para el usuario weblogic
   hosts: nodo2
   tasks:
-    - name: Instalar paquetes
-      package:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - curl
-        - apt-transport-https
-        - ca-certificates
-        - software-properties-common
-        - glances
-        - git
-        - vim
+    - name: Descomprimir archivo
+      unarchive:
+        src: /home/weblogic/server-jre-8u191-linux-x64.tar.gz
+        dest: /opt/oracle
+        remote_src: yes
+      become_user: weblogic
