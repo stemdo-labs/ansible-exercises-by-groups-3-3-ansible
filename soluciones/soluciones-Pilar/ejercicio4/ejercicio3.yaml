@@ -1,5 +1,5 @@
 limpiar.yml:
-- name: Limpiar dependencias y la cache
+- name: Limpiar dependencias y la caché
   hosts: nodo2
   become: yes
   tasks:
@@ -8,8 +8,10 @@ limpiar.yml:
         autoremove: yes
         purge: yes
 
-    - name: Limpiar la cache
-      shell: 'sudo rm -rf /var/cache/*'
+    - name: Limpiar la caché
+      apt:
+        autoclean: yes
+     
 
       
  # Luego, en otro playbook, importa este playbook para ejecutar las tareas de limpieza:

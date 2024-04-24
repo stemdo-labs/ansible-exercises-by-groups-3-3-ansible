@@ -1,0 +1,15 @@
+- name: Instalar paquetes con loop
+  hosts: nodo2
+  tasks:
+    - name: Instalar paquetes
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - curl
+        - apt-transport-https
+        - ca-certificates
+        - software-properties-common
+        - glances
+        - git
+        - vim
