@@ -1,0 +1,7 @@
+- name: Instalar paquete .deb desde internet
+  hosts: node2
+  tasks:
+    - name: Instalar paquete .deb desde repositorio
+      apt:
+        name: vim
+        state: present

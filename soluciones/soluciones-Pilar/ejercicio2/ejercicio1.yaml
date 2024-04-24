@@ -1,0 +1,12 @@
+- name: Comprimir directorio /apps/tomcat con variables
+  hosts: nodo2
+  vars:
+    source_dir: /apps/tomcat
+    dest_dir: /tmp
+    archive_name: tomcat_backup.tar.gz
+  tasks:
+    - name: Comprimir directorio {{ source_dir }}
+      archive:
+        path: "{{ source_dir }}"
+        dest: "{{ dest_dir }}/{{ archive_name }}"
+        format: gz

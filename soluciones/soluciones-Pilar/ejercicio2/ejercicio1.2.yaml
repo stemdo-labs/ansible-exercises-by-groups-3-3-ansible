@@ -1,0 +1,8 @@
+- name: Comprimir directorio /apps/tomcat sin variables
+  hosts: nodo2
+  tasks:
+    - name: Comprimir directorio /apps/tomcat
+      archive:
+        path: /apps/tomcat
+        dest: /tmp/tomcat_backup.tar.gz
+        format: gz

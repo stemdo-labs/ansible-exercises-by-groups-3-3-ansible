@@ -1,0 +1,2 @@
+5. Instalar en linea de comandos con apt, apache2.
+ansible webservers -m apt -a "name=apache2 state=present" -i inventario --become

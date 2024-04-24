@@ -1,0 +1,12 @@
+- name: Buscar archivos .log con 30 días de antigüedad en /var/log
+  hosts: nodo2
+  tasks:
+    - name: Buscar archivos .log
+      find:
+        paths: /var/log
+        patterns: "*.log"
+        age: 30d
+      register: archivos_logs
+
+    - debug:
+        var: archivos_logs.files

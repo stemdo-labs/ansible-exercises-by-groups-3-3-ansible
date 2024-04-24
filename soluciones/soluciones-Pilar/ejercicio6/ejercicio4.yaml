@@ -1,0 +1,20 @@
+- name: Validar si los paquetes están instalados
+  hosts: nodo2
+  tasks:
+    - name: Verificar la instalación de los paquetes
+      become: yes
+      become_method: sudo
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apache2
+        - vim
+        - nginx
+        - filebeat
+      register: package_result
+
+    - name: Mostrar el estado de los paquetes
+      debug:
+        msg: "El paquete {{ item.item }} está {{ 'instalado' if item.changed else 'no instalado' }}"
+      loop: "{{ package_result.results }}"

@@ -1,0 +1,9 @@
+- name: Mostrar archivos en nodos Ubuntu
+  hosts: webservers
+  tasks:
+    - name: Mostrar archivos con ls
+      shell: ls {{ item }}
+      loop:
+        - "/"
+        - "-a /"
+        - "-la /"
