@@ -1,0 +1,22 @@
+- name: Lista de usuarios
+  hosts: localhost
+  tasks:
+    - name: Crear usuarios
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+        expires: "{{ item.expire }}"
+        uid: "{{ item.uid }}"
+        generate_ssh_key: "{{ item.generate_ssh_key }}"
+        ssh_key_bits: 2048
+        ssh_key_file: "/home/{{ item.name }}/.ssh/id_rsa"
+      loop:
+        - { name: Pedro, groups: admin,usuarios,produccion, expire: no, uid: 1040, generate_ssh_key: yes }
+        - { name: Juan, groups: usuarios,desarrollo, expire: no, uid: 1041, generate_ssh_key: no }
+        - { name: Maria, groups: usuarios,desarrollo, expire: no, uid: 1042, generate_ssh_key: no }
+        - { name: Ana, groups: testing,produccion, expire: no, uid: 1043, generate_ssh_key: yes }
+        - { name: Antonio, groups: usuarios,testing, expire: no, uid: 1044, generate_ssh_key: no }
+        - { name: Marta, groups: usuarios,produccion, expire: no, uid: 1045, generate_ssh_key: no }
+        - { name: Jose, groups: admin,usuarios,desarrollo, expire: no, uid: 1046, generate_ssh_key: yes }
+        - { name: Invitado1, groups: usuarios, expire: yes }
+        - { name: Invitado2, groups: usuarios, expire: yes }

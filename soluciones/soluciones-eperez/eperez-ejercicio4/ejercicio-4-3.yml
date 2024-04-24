@@ -27,5 +27,5 @@
      ansible.builtin.service:
        name: apache2
        state: restarted
-       changed_when: 
+       changed_when: false
 

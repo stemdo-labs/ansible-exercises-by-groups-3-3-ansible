@@ -1,0 +1,33 @@
+ - name: Instalaciones
+      hosts: grupo1
+      become: yes
+      tasks:
+    - name: Instalar paquetes ubuntu
+      apt:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - curl
+        - apt-transport-https
+        - ca-certificates
+        - software-properties-common
+        - glances
+        - git
+        - vim
+      tags: ubuntu
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Instalar paquetes CentOS
+      yum:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - curl
+        - apt-transport-https
+        - ca-certificates
+        - software-properties-common
+        - glances
+        - git
+        - vim
+      tags: centos  
+      when: ansible_distribution == "CentOS"
