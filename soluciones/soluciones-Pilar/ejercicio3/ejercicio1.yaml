@@ -1,0 +1,29 @@
+# Prametrizaremos los valores constantes que son susceptibles de ser repetidos
+    #firewall_service: https
+    #firewall_ports: 
+     # - 8081/tcp
+     # - 161-162/udp    
+    #firewall_source: 192.168.20.0/24
+# entonces en el yml:
+
+- name: Configurar firewall
+  hosts: web
+  vars_files:
+    - vars.yml
+  become: yes
+  tasks:
+    - ufw:
+        service: '{{ firewall_service }}'
+        permanent: true
+        state: enabled
+    - ufw:
+        source: '{{ firewall_source }}'
+        zone: internal
+        state: enabled
+    - name: Configurar puertos en el firewall
+      ufw:
+        port: '{{ item }}'
+        permanent: true
+        state: enabled
+      loop: '{{ firewall_ports }}'
+---
