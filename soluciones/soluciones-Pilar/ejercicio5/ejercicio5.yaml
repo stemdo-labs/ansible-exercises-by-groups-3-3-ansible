@@ -1,0 +1,38 @@
+- name: Crear usuarios y grupos
+  hosts: nodo2
+  become: yes
+  tasks:
+    - name: Crear grupos
+      group:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - usuarios
+        - admin
+        - desarrollo
+        - testing
+        - produccion
+
+    - name: Crear usuarios y asignarlos a grupos
+      user:
+        name: "{{ usr }}"
+        groups: "{{ grupo }}"
+        state: present
+      loop: "{{ usuario }}"
+      loop_control:
+        loop_var: usr
+      vars:
+        usuario:
+          - Pedro
+          - Juan
+          - Maria
+          - Ana
+          - Antonio
+          - Marta
+          - Jose
+        grupo:
+          - usuarios
+          - admin
+          - desarrollo
+          - testing
+          - produccion

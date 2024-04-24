@@ -1,0 +1,7 @@
+- name: Copiar archivos JSON a /tmp/jsons
+  hosts: nodo2
+  tasks:
+    - name: Copiar archivos JSON
+      copy:
+        src: /home/vboxuser/json/*.json
+        dest: /tmp/jsons/
