@@ -27,7 +27,7 @@
 ...
 ---
 - name: Instalar paquetes según la distribución del host
-  hosts: all
+  hosts: webserver
   tasks:
     - name: Obtener información del sistema
       setup:
