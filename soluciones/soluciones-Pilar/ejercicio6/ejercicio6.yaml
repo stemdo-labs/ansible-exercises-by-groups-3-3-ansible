@@ -1,33 +1,17 @@
----
-- name: Crear usuarios y grupos
+- name: Buscar archivos grandes de forma recursiva
   hosts: nodo2
   become: yes
   tasks:
-    - name: Crear grupos
-      group:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - usuarios
-        - admin
-        - desarrollo
-        - testing
-        - produccion
+    - name: Buscar archivos de más de 100 megabytes de forma recursiva
+      find:
+        paths: /
+        recurse: yes
+        size: 100M
+      register: archivos_grandes
 
-    - name: Crear usuarios y asignar grupos
-      user:
-        name: "{{ item.name }}"
-        groups: "{{ item.groups }}"
-        state: present
-        expires: "{{ item.expires }}"
-        uid: "{{ item.uid }}"
-      loop:
-        - { name: 'Pedro', groups: ['admin', 'usuarios', 'produccion'], expires: false, uid: 1040 }
-        - { name: 'Juan', groups: ['usuarios', 'desarrollo'], expires: false, uid: 1041 }
-        - { name: 'Maria', groups: ['usuarios', 'desarrollo'], expires: false, uid: 1042 }
-        - { name: 'Ana', groups: ['testing', 'produccion'], expires: false, uid: 1043 }
-        - { name: 'Antonio', groups: ['usuarios', 'testing'], expires: false, uid: 1044 }
-        - { name: 'Marta', groups: ['usuarios', 'produccion'], expires: false, uid: 1045 }
-        - { name: 'Jose', groups: ['admin', 'usuarios', 'desarrollo'], expires: false, uid: 1046 }
-        - { name: 'Invitado1', groups: ['usuarios'], expires: true }
-        - { name: 'Invitado2', groups: ['usuarios'], expires: true }
+    - name: Imprimir archivos grandes
+      debug:
+        msg: "Archivo {{ item.path }} de tamaño {{ item.size }}"
+      loop: "{{ archivos_grandes.files }}"
+
+
