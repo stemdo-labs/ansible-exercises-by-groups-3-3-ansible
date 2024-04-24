@@ -1,38 +1,12 @@
-- name: Crear usuarios y grupos
+- name: Buscar archivos .log con 30 días de antigüedad en /var/log
   hosts: nodo2
-  become: yes
   tasks:
-    - name: Crear grupos
-      group:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - usuarios
-        - admin
-        - desarrollo
-        - testing
-        - produccion
+    - name: Buscar archivos .log
+      find:
+        paths: /var/log
+        patterns: "*.log"
+        age: 30d
+      register: archivos_logs
 
-    - name: Crear usuarios y asignarlos a grupos
-      user:
-        name: "{{ usr }}"
-        groups: "{{ grupo }}"
-        state: present
-      loop: "{{ usuario }}"
-      loop_control:
-        loop_var: usr
-      vars:
-        usuario:
-          - Pedro
-          - Juan
-          - Maria
-          - Ana
-          - Antonio
-          - Marta
-          - Jose
-        grupo:
-          - usuarios
-          - admin
-          - desarrollo
-          - testing
-          - produccion
+    - debug:
+        var: archivos_logs.files
