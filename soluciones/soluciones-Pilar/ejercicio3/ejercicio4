@@ -1,0 +1,3 @@
+4. Usar el módulo `setup` para obtener la ipv6 del nodo, utilizando comandos ad-hoc. El resultado se debe almacenarse en un fichero, todo se debe ejecutar en un único comando.
+
+ansible nodo2 -m setup -a 'filter=ansible_default_ipv6' > ipv6.txt

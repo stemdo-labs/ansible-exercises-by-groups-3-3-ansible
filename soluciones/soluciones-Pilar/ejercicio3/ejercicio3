@@ -1,0 +1,4 @@
+3. Siguiendo la documentación de ansible obtener estos valores de un nuestro máquina local como de un nodo: `os family` , `hostname` y `ipv4`
+
+ansible localhost -m setup -a 'filter=ansible_distribution_family,ansible_hostname,ansible_default_ipv4'
+ansible nodo2 -m setup -a 'filter=ansible_distribution_family,ansible_hostname,ansible_default_ipv4'
