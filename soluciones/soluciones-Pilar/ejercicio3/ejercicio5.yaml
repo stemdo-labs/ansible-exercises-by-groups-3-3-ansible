@@ -1,0 +1,18 @@
+# Primero creo mi script
+#!/bin/bash
+#echo '{"os_type": "$(uname -s)"}'
+
+
+#Creo el playbook y lo lanzo como una tarea
+
+- hosts: nodo2
+  gather_facts: no
+   
+  tasks:
+    - name: Ejecutar script de fact personalizado
+      script: script.sh
+      register: output
+
+    - name: Mostrar el resultado del fact personalizado
+      debug:
+        var: output.stdout

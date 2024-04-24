@@ -1,0 +1,31 @@
+# Contenido del archivo dev.yml
+#app_port: 8080
+# Contenido del archivo pre.yml
+#app_port: 8081
+# Contenido del archivo pro.yml
+#app_port: 80
+
+#Playbook para el deploy deploy.yml
+- hosts: nodo2
+  gather_facts: false
+  become: 'yes'
+
+  tasks:
+    - name: Solicitar valor de environment
+      pause:
+        prompt: "Por favor, introduce el nombre del archivo de variables (por ejemplo, pre, dev, pro):"
+      register: user_input
+
+    - name: Mostrar valor de environment
+      debug:
+        var: user_input.user_input
+
+    - name: Cargar variables del entorno
+      include_vars:
+        file: "{{ user_input.user_input }}.yml"
+      when: user_input.user_input is defined
+      
+    - name: Mostrar variables cargadas
+      debug:
+        var: app_port
+    

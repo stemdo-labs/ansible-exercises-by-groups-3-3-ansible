@@ -1,0 +1,15 @@
+- name: Instalar paquete .deb desde local
+  hosts: node2
+  tasks:
+    - name: Copiar paquete .deb al servidor remoto
+      copy:
+        src: /nginx_1.18.0-2~bionic_amd64.deb
+        dest: /tmp/nginx_1.18.0-2~bionic_amd64.deb
+
+    - name: Instalar paquete .deb
+      apt:
+        deb: /tmp/nginx_1.18.0-2~bionic_amd64.deb
+        state: present
+
+
+

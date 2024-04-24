@@ -1,0 +1,6 @@
+#1. Crear la carpeta de trabajo y el primer inventario solo con el nodo 1.
+mkdir ansible
+nano inventario
+--------------
+nodo1
+192.168.162.140
