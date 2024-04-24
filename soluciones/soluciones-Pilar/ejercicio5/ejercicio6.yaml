@@ -1,0 +1,36 @@
+---
+- name: Crear usuarios con especificaciones
+  hosts: nodo1
+  become: yes
+  tasks:
+    - name: Crear grupos
+      group:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - admin
+        - usuarios
+        - produccion
+        - desarrollo
+        - testing
+
+    - name: Crear usuarios con especificaciones
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+        state: present
+        expires: "{{ item.expires | default('no') }}"
+        uid: "{{ item.uid }}"
+        create_ssh_key: "{{ item.create_ssh_key | default(false) }}"
+        ssh_key_bits: "{{ item.ssh_key_bits | default(2048) }}"
+      loop:
+        - { name: 'Pedro', groups: ['admin', 'usuarios', 'produccion'], expires: 'no', uid: 1040, create_ssh_key: true }
+        - { name: 'Juan', groups: ['usuarios', 'desarrollo'], expires: 'no', uid: 1041, create_ssh_key: false }
+        - { name: 'Maria', groups: ['usuarios', 'desarrollo'], expires: 'no', uid: 1042, create_ssh_key: false }
+        - { name: 'Ana', groups: ['testing', 'produccion'], expires: 'no', uid: 1043, create_ssh_key: true }
+        - { name: 'Antonio', groups: ['usuarios', 'testing'], expires: 'no', uid: 1044, create_ssh_key: false }
+        - { name: 'Marta', groups: ['usuarios', 'produccion'], expires: 'no', uid: 1045, create_ssh_key: false }
+        - { name: 'Jose', groups: ['admin', 'usuarios', 'desarrollo'], expires: 'no', uid: 1046, create_ssh_key: true }
+        - { name: 'Invitado1', groups: ['usuarios'], expires: 'yes', create_ssh_key: false }
+        - { name: 'Invitado2', groups: ['usuarios'], expires: 'yes', create_ssh_key: false }
+...

@@ -1,5 +1,4 @@
----
-- name: Crear usuarios y grupos aleatorios
+- name: Crear usuarios y grupos
   hosts: nodo2
   become: yes
   tasks:
@@ -14,10 +13,26 @@
         - testing
         - produccion
 
-    - name: Crear usuarios con grupos aleatorios
+    - name: Crear usuarios y asignarlos a grupos
       user:
-        name: "{{ users | random }}"
-        groups: "{{ groups | random }}"
+        name: "{{ usr }}"
+        groups: "{{ grupo }}"
         state: present
-      loop: "{{ range(0, max(users | length, groups | length)) }}"
-...
+      loop: "{{ usuario }}"
+      loop_control:
+        loop_var: usr
+      vars:
+        usuario:
+          - Pedro
+          - Juan
+          - Maria
+          - Ana
+          - Antonio
+          - Marta
+          - Jose
+        grupo:
+          - usuarios
+          - admin
+          - desarrollo
+          - testing
+          - produccion
