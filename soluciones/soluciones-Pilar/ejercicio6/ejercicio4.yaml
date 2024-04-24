@@ -1,53 +1,20 @@
----
-- name: Instalar paquetes 
-  hosts: webserver
+- name: Validar si los paquetes están instalados
+  hosts: nodo2
   tasks:
-    - name: Obtener información del sistema
-      setup:
-
-    - name: Instalar paquetes en Ubuntu
+    - name: Verificar la instalación de los paquetes
+      become: yes
+      become_method: sudo
       apt:
         name: "{{ item }}"
         state: present
       loop:
-        - openssh-server
-        - python3
-      when: ansible_distribution == 'Ubuntu'
-      tags:
-        - ubuntu
+        - apache2
+        - vim
+        - nginx
+        - filebeat
+      register: package_result
 
-    - name: Instalar paquetes en CentOS
-      command: yum install -y {{ item }}
-      loop:
-        - openssh-server
-        - python3
-      when: ansible_distribution in ['CentOS', 'Fedora', 'RedHat']
-      tags:
-        - centos
-...
----
-- name: Instalar paquetes según la distribución del host
-  hosts: webserver
-  tasks:
-    - name: Obtener información del sistema
-      setup:
-
-    - name: Instalar paquetes centos fedora y redhat
-      yum:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - openssh-server
-        - python3
-      when: ansible_distribution in ['CentOS', 'Fedora', 'RedHat']
-
-    - name: Instalar paquetes en Ubuntu
-      apt:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - openssh-server
-        - python3
-      when: ansible_distribution == 'Ubuntu'
-
-... 
+    - name: Mostrar el estado de los paquetes
+      debug:
+        msg: "El paquete {{ item.item }} está {{ 'instalado' if item.changed else 'no instalado' }}"
+      loop: "{{ package_result.results }}"
