@@ -1,0 +1,22 @@
+limpiar.yml:
+- name: Limpiar dependencias y la cache
+  hosts: nodo2
+  become: yes
+  tasks:
+    - name: Limpiar dependencias del sistema
+      apt:
+        autoremove: yes
+        purge: yes
+
+    - name: Limpiar la cache
+      shell: 'sudo rm -rf /var/cache/*'
+
+      
+ # Luego, en otro playbook, importa este playbook para ejecutar las tareas de limpieza:
+- name: Ejecutar limpieza de dependencias y cache
+  hosts: nodo2
+- name: Importar playbook de limpieza
+  import_playbook: limpiar.yml
+
+
+
