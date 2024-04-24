@@ -1,0 +1,2 @@
+4. Lanzar con comando: ping a todos los nodos webservers del inventario ficticio para comprobar cuales están activos y cuales no.
+ansible webservers -m ping -i inventario

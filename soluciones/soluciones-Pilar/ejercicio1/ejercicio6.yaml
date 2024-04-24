@@ -1,0 +1,7 @@
+- name: Guardar la fecha actual en un archivo
+  hosts: nodo2
+  tasks:
+    - name: Guardar la fecha actual en /tmp/fechahora.data
+      shell: date > /tmp/fechahora.data
+
+# ansible-playbook guardarfecha.yml -i inventario -u vboxuser --ask-pass

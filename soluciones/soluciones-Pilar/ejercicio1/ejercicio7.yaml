@@ -1,0 +1,11 @@
+- name: Tareas para el nodo1
+  hosts: nodo1
+  become: yes
+  tasks:
+    - name: Ping a todos los nodos webservers
+      shell: ansible webservers -m ping
+
+    - name: Instalación de Apache en nodo1
+      apt:
+        name: apache2
+        state: present
