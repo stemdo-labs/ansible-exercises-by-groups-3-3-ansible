@@ -1,7 +1,12 @@
-- name: Copiar archivos JSON a /tmp/jsons
+- name: Comprimir archivos de logs con extensiones .log, .out y .txt
   hosts: nodo2
   tasks:
-    - name: Copiar archivos JSON
-      copy:
-        src: /home/vboxuser/json/*.json
-        dest: /tmp/jsons/
+    - name: Comprimir archivos
+      archive:
+        path: /home/vboxuser/tomcat/logs
+        dest: ./archivo_logs.tar.gz
+        format: gz
+        include:
+          - "*.log"
+          - "*.out"
+          - "*.txt"
