@@ -1,0 +1,11 @@
+- name: Comprobar instalación de paquetes
+  hosts: grupo1
+  become: yes
+  vars:
+    paquetes: ['apache2','vim','nginx', 'filebeat']
+  tasks:
+    - name: Verificar los paquetes están instalados
+      command: dpkg -l | grep {{ item }}
+      ignore_errors: yes
+      loop: "{{ paquetes }}"
+      register: output
