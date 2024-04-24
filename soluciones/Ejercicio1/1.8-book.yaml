@@ -1,0 +1,19 @@
+---
+- name: ejemplo playbook
+  hosts: nodo1
+  become: yes
+
+  tasks:
+    - name: Ping nodo1
+      ping:
+    - name: Install apache
+      apt: name=apache2 state=latest
+    - name: check apache is working
+      service:
+        name: apache2
+        state: started
+      register: apache2_status
+    - name: Install mariadb
+      apt: name=mariadb-server state=latest
+    #- debug: msg="the echo was {{ cat /tmp/fechahora.data}}"
+...

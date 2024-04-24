@@ -1,0 +1,12 @@
+---
+- name: ejemplo playbook
+  hosts: nodo1
+  become: yes
+
+  tasks:
+    - name: Ping nodo1
+      ping:
+    - name: Install apache
+      apt: name=apache2 state=latest
+    #- debug: msg="the echo was {{ cat /tmp/fechahora.data}}"
+...
