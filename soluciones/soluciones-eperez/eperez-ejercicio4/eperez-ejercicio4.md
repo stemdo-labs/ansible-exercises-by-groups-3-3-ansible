@@ -23,7 +23,7 @@
         state: started
         enabled: yes
 ```
-2. Para hacer la importación del playbook anterior, se crearía el siguiente .yml
+2. Para hacer la importación del playbook anterior, se crearía el siguiente archivo
 ```yml
 - name: Importar playbook de Apache
   ansible.builtin.import_playbook: ejercicio-4-1.yaml

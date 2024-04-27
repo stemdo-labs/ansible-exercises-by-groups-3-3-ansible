@@ -26,19 +26,20 @@ Sin usar variables
   vars:
     name: "backup.tar.gz"
 
-
   tasks:
     - name: Comprimir directorio /apps/tomcat/logs
       archive:
         path: "/apps/tomcat/logs"
         dest: "/home/eperez/{{name}}"
         format: gz
+        exclude: "*.access.txt"
     
     - name: Comprimir directorio /var/log/tomcat
       archive:
         path: "/var/log/tomcat"
         dest: "/home/eperez/{{name}}"
         format: gz
+        exclude: "*.access.txt"
 ```
 
 3. Instalar paquetes .deb desde local y desde internet, probad a instalar algún programa que conozcáis

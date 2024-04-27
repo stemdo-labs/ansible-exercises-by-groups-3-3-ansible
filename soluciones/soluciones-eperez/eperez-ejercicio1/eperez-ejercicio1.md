@@ -10,7 +10,7 @@ mkdir ansible-lab
 
 Primer inventario:
 ```
-db ansible_host=192.168.1.79 ansible_user=eperez ansible_become_pass=1598
+ansible_host=192.168.1.79 ansible_user=eperez ansible_become_pass=1598
 ```
 
 2. Crear un inventario (ficticio) donde tengamos 5 nodos (nodo1 a nodo5) agrupados en los siguientes grupos:
@@ -20,15 +20,15 @@ db ansible_host=192.168.1.79 ansible_user=eperez ansible_become_pass=1598
 
 ```
 [webservers]
-ansible_host=192.168.1.79 ansible_user=nodo1 
-ansible_host=192.168.1.80 ansible_user=nodo4
-ansible_host=192.168.1.81 ansible_user=nodo5 
+nodo1 
+nodo4
+nodo5 
 
 [dataservers]
-ansible_host=192.168.1.81 ansible_user=nodo3
+nodo3
 
 [proxy]
-ansible_host=192.168.1.81 ansible_user=nodo2
+nodo2
 ```
 
 3. Crear un fichero de configuración para evitar tener que incluir el inventario, para que nos haga todo con permisos de superusuario, etc.

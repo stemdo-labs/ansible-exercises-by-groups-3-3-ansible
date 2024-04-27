@@ -2,8 +2,6 @@
 
 Crear archivo myvar.yml
 ``` 
-en: enable
-dis: disable
 port1: 8081/tcp  
 port2: 161-162/udp 
 source1: 192.168.20.0/24
@@ -20,20 +18,20 @@ source1: 192.168.20.0/24
   - firewalld:
     service: https
     permanent: true
-    state: {{en}}
+    state: enable
   
   - firewalld:
       port: {{port1}}   
       permanent: true
-      state: {{dis}}
+      state: disable
 
   - firewalld:
       port: {{port2}}    
       permanent: true
-      state: {{dis}}
+      state: disable
 
   - firewalld:
-      source:{{source1}}   
+      source: {{source1}}   
       zone: internal
       state: enable
 ```
