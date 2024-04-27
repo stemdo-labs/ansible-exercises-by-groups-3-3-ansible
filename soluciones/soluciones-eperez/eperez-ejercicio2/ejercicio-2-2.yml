@@ -1,0 +1,19 @@
+- name: Comprimir directorio
+  hosts: grupo1
+  become: yes
+  vars:
+    name: "backup.tar.gz"
+
+
+  tasks:
+    - name: Comprimir directorio /apps/tomcat/logs
+      archive:
+        path: "/apps/tomcat/logs"
+        dest: "/home/eperez/{{name}}"
+        format: gz
+    
+    - name: Comprimir directorio /var/log/tomcat
+      archive:
+        path: "/var/log/tomcat"
+        dest: "/home/eperez/{{name}}"
+        format: gz

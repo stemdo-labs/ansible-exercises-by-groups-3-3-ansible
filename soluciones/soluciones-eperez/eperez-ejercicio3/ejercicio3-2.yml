@@ -1,0 +1,12 @@
+- name: Pedir entorno
+  hosts: grupo1
+  become: yes
+  vars_prompt:
+
+    - name: dev
+      prompt: Introduzca el entorno de despliegue ¿dev, pre o pro?
+      private: no
+    
+    tasks:
+    - name: Cargar variables del entorno
+      include_vars: "{{ entorno }}_vars.yml"

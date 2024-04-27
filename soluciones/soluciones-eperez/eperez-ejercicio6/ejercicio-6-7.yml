@@ -1,0 +1,11 @@
+- name: Buscar archivos 
+  hosts: grupo1
+  become: yes
+  tasks:
+    - name: + de 100 megas y Regex
+      find:
+        paths: /var/log
+        patterns: '[a-z]_[0-9]{8}\.log'
+        size: +100M
+        recurse: yes
+ 

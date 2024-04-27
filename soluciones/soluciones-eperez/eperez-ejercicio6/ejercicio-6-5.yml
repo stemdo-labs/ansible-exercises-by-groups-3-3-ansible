@@ -1,0 +1,9 @@
+- name: Buscar archivos
+  hosts: grupo1
+  become: yes
+  tasks:
+    - name: Archivos .log con 30 días de antigüedad
+      find:
+        paths: /var/log
+        patterns: "*.log"
+        age: 30d

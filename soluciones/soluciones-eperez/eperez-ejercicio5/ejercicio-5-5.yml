@@ -1,0 +1,9 @@
+  - name: Instalar Nginx
+      hosts: nodo1
+      become: true
+      tasks:
+      - name: Instalar Nginx
+        apt:
+          name: nginx
+          state: latest
+

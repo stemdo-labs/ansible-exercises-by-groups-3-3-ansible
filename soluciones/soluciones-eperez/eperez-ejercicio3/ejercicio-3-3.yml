@@ -1,0 +1,15 @@
+- name: Obtener valores os_family, hostname e ipv4
+  hosts: all
+  become: yes
+  tasks:
+    - name: Obtener valor os_family
+      debug:
+        msg: "El sistema operativo de mi máquina es {{ ansible_os_family }}"
+
+    - name: Obtener valor hostname
+      debug:
+        msg: "El nombre de mi máquina es {{ ansible_hostname }}"
+
+    - name: Obtener valor ipv4
+      debug:
+        msg: "La dirección IP de mi máquina es {{ ansible_default_ipv4.address }}"
