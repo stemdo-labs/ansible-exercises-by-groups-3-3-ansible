@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+    - name: Guardar fecha en fechadora.data en la ruta /tmp
+      shell: echo "22/04/2024" > /tmp/fechahora.data

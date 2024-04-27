@@ -1,0 +1,14 @@
+- name: deb
+  hosts: grupo1
+  become: yes
+
+  tasks:
+    - name: Instalar tree
+      apt:
+        name: tree
+        state: latest
+
+    - name: Instalar tree
+      apt:
+        name: tree
+        state: latest

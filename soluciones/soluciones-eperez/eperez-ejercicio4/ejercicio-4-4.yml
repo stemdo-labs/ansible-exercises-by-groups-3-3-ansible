@@ -1,0 +1,8 @@
+- name: Limpieza
+  hosts: grupo1
+  become: yes
+  tasks:
+
+    - name: limpiar caché
+      apt:
+        autoclean: yes

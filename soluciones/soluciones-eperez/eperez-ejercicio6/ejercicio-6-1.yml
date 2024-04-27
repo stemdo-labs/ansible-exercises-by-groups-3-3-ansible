@@ -1,0 +1,12 @@
+- name: Lista de servicios y comprobar que están iniciados
+  hosts: grupo1
+  become: yes
+  vars:
+    web_services: ["httpd", "vsftpd"]
+  tasks:
+    - name: Comprobar que están iniciados
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+      loop: "{{ web_services }}"
+

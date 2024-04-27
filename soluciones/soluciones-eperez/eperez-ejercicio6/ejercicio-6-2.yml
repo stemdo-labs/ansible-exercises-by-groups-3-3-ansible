@@ -1,0 +1,11 @@
+- name: Comprimir archivos
+  hosts: grupo1
+  become: yes
+  vars:
+    rutas: ['*.log','*.out','*.txt']
+  tasks:
+    - name: Comprimir archivos con exclusiones
+      archive:
+        path: /home/user/tomcat/logs/{{ item }}
+        dest: /tmp/archivo.tar.gz
+      loop: "{{ rutas }}"

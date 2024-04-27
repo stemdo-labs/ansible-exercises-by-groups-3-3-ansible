@@ -1,0 +1,10 @@
+- name: Archivos con más de 100 megas
+  hosts: grupo1
+  become: yes
+  tasks:
+    - name: En la ruta /
+      find:
+        paths: /
+        size: +100M
+        recurse: yes
+  

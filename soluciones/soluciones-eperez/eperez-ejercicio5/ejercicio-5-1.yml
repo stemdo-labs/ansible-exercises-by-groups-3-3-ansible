@@ -1,0 +1,17 @@
+- name: Mostrar archivos en nodos Ubuntu
+  hosts: grupomixto
+  tasks:
+    - name: Mostrar archivos con ls
+      ansible.builtin.shell: "ls {{ item }}"
+      loop:
+        - "/"
+        - "-a /"
+        - "-la /"
+      register: ls_output
+
+    - name: Imprimir salida de ls
+      debug:
+        var: ls_output.stdout_lines
+
+
+

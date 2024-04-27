@@ -1,0 +1,30 @@
+- name: Copiar archivos JSON
+  hosts: grupo1
+  tasks:
+    - name: Crear directorio /home/eperez/json
+      ansible.builtin.file:
+        path: /home/eperez/json
+        state: directory
+        mode: '0755'
+
+    - name: Crear directorio /tmp/jsons
+      ansible.builtin.file:
+        path: /tmp/jsons
+        state: directory
+        mode: '0755'
+
+    - name: Copiar archivos JSON a /tmp/jsons
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: /tmp/jsons
+      loop:
+
+    - name: Lista los ficheros
+      shell: ls /home/eperez/json/*.json
+      register: ls_output
+
+    - name: Copiar jsons en /tmp/jsons
+      copy:
+        src: "{{ item }}"
+        dest: "/tmp/jsons"
+      loop: "{{ ls_output.stdout_lines }}"
