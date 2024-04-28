@@ -1,0 +1,8 @@
+- name: Archivos cifrados
+  hosts: grupo1
+  vars_files:
+    -C:\Users\eperez\EjerciciosBootcamp\4-Ansible\ansible-exercises-by-groups-3-3-ansible\soluciones\soluciones-eperez\eperez-ejercicio7\missecretos.yml
+  tasks:
+    - name: Mostrar el valor de miuser y micontra
+      debug:
+        msg: "Usuario: {{ miuser }}, Contraseña: {{ micontra }}"
