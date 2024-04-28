@@ -1,0 +1,31 @@
+- name: Tareas
+  hosts: grupo1
+  become: yes
+  tasks:
+    - name: Instalación de Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Iniciar el servicio
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Comprobar si Apache2 está funcionando
+      systemd:
+        name: apache2
+        state: started
+        enabled: yes
+      
+      notify:
+        - Restart apache
+
+ handlers:
+   - name: Restart apache
+     ansible.builtin.service:
+       name: apache2
+       state: restarted
+       changed_when: false
+

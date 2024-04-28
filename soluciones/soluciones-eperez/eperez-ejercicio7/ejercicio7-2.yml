@@ -1,0 +1,11 @@
+- name: Esperar aborrar archivo
+  hosts: remoto
+  tasks:
+    - name: Esperar a que el archivo deje de existir
+      wait_for:
+        path: /ruta/al/archivo/bloqueo.lock
+        state: absent
+
+    - name: Mostrar mensaje cuando el archivo desaparezca
+      debug:
+        msg: "El archivo bloqueo.lock ha sido eliminado"

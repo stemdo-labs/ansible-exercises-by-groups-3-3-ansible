@@ -1,0 +1,28 @@
+- name: Añadir grupos
+  hosts: grupo1
+  become: yes
+  tasks:
+    - name: Crear grupos
+      ansible.builtin.group:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - usuarios
+        - admin
+        - desarrollo
+        - testing
+        - produccion
+      register: echo
+
+    - name: Añadir usuarios
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - Pedro
+        - Juan
+        - Maria
+        - Ana
+        - Antonio
+        - Marta
+        - Jose

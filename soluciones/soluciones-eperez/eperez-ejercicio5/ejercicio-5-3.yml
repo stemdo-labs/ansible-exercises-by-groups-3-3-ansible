@@ -1,0 +1,16 @@
+- name: Instalaciones
+  hosts: grupo1
+  become: yes
+  tasks:
+    - name: Install
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - curl
+        - apt-transport-https
+        - ca-certificates
+        - software-properties-common
+        - glances
+        - git
+        - vim

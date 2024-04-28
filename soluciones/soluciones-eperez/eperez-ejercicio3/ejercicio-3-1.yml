@@ -1,0 +1,26 @@
+- name: Configurar firewall
+  hosts: web
+  vars_files:
+    - myvar.yml
+    
+  tasks:
+
+  - firewalld:
+    service: https
+    permanent: true
+    state: enable
+  
+  - firewalld:
+      port: {{port1}}   
+      permanent: true
+      state: disable
+
+  - firewalld:
+      port: {{port2}}    
+      permanent: true
+      state: disable
+
+  - firewalld:
+      source: {{source1}}   
+      zone: internal
+      state: enable

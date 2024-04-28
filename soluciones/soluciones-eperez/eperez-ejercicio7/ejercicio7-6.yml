@@ -1,0 +1,5 @@
+- name: roles
+  hosts: grupo1
+  become: yes
+  roles:
+    - geerlingguy.apache
